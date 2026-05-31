@@ -404,6 +404,7 @@
             { icon: 'fa-circle-half-stroke', label: 'Toggle theme', sub: 'Action', run: () => { const t = $('#themeToggle'); if (t) t.click(); } },
             { icon: 'fa-linkedin',       label: 'LinkedIn',       sub: 'Link', brand: true, run: open('https://linkedin.com/in/yogesh-kumar-baghel') },
             { icon: 'fa-github',         label: 'GitHub',         sub: 'Link', brand: true, run: open('https://github.com/baghelyogesh55') },
+            { icon: 'fa-route',          label: 'Trailhead profile', sub: 'Link', run: open('https://www.salesforce.com/trailblazer/profile') },
             { icon: 'fa-envelope',       label: 'Email me',       sub: 'Link', run: open('mailto:baghelyogesh55@gmail.com') },
         ];
 

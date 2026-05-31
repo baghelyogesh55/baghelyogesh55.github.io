@@ -757,6 +757,13 @@ ul { list-style: none; }
     color: var(--accent);
 }
 
+.cert-cta {
+    text-align: center;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
 /* ===== PROJECTS ===== */
 .projects-grid {
     display: grid;
