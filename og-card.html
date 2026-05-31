@@ -24,7 +24,7 @@
         background-size: 48px 48px;
         mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
     }
-    .content { position: relative; z-index: 2; max-width: 760px; }
+    .content { position: relative; z-index: 2; max-width: 600px; }
     .badge {
         display: inline-block;
         padding: 8px 20px;
@@ -65,37 +65,34 @@
         color: #64748b;
         font-weight: 500;
     }
-    .planet {
+    .photo {
         position: absolute;
-        right: -60px; top: 50%;
+        right: 90px; top: 50%;
         transform: translateY(-50%);
-        width: 520px; height: 520px;
+        width: 400px; height: 400px;
         z-index: 1;
     }
-    .planet .core {
+    .photo img {
+        width: 100%; height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(14,165,233,0.6);
+        box-shadow: 0 0 80px rgba(14,165,233,0.45);
+    }
+    .photo .ring {
         position: absolute; top: 50%; left: 50%;
-        width: 240px; height: 240px;
         transform: translate(-50%,-50%);
         border-radius: 50%;
-        background: radial-gradient(circle at 35% 30%, #38bdf8, #0ea5e9 45%, #6d28d9 90%);
-        box-shadow: 0 0 90px rgba(14,165,233,0.6), inset -30px -20px 60px rgba(0,0,0,0.5);
+        border: 2px solid rgba(139,92,246,0.4);
+        width: 452px; height: 452px;
     }
-    .planet .ring {
-        position: absolute; top: 50%; left: 50%;
-        border: 3px solid rgba(6,182,212,0.55);
-        border-radius: 50%;
-        transform: translate(-50%,-50%) rotateX(74deg);
-    }
-    .planet .ring.r1 { width: 400px; height: 400px; }
-    .planet .ring.r2 { width: 480px; height: 480px; border-color: rgba(139,92,246,0.4); }
 </style>
 </head>
 <body>
     <div class="grid-overlay"></div>
-    <div class="planet">
-        <div class="ring r2"></div>
-        <div class="ring r1"></div>
-        <div class="core"></div>
+    <div class="photo">
+        <div class="ring"></div>
+        <img src="profile.jpg" alt="Yogesh Baghel">
     </div>
     <div class="content">
         <span class="badge">⚡ 10x Salesforce Certified</span>
