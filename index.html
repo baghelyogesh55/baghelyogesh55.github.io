@@ -25,6 +25,26 @@
 </head>
 <body>
 
+    <!-- Animated aurora background -->
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob a1"></span>
+        <span class="aurora-blob a2"></span>
+        <span class="aurora-blob a3"></span>
+    </div>
+
+    <!-- Command palette (⌘K) -->
+    <div class="cmdk" id="cmdk" aria-hidden="true">
+        <div class="cmdk-backdrop" data-cmdk-close></div>
+        <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command palette">
+            <div class="cmdk-input-wrap">
+                <i class="fas fa-magnifying-glass"></i>
+                <input type="text" id="cmdkInput" placeholder="Jump to a section or link…" autocomplete="off" spellcheck="false">
+                <span class="cmdk-hint">ESC</span>
+            </div>
+            <ul class="cmdk-list" id="cmdkList"></ul>
+        </div>
+    </div>
+
     <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-logo">YB</div>
@@ -74,6 +94,9 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="cmdk-trigger" id="cmdkTrigger" aria-label="Open command palette">
+            <i class="fas fa-magnifying-glass"></i> <kbd>⌘K</kbd>
+        </button>
         <div class="theme-toggle" id="themeToggle">
             <i class="fas fa-moon"></i>
         </div>
@@ -133,30 +156,52 @@
                 <span class="section-tag">Who I Am</span>
                 <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
             </div>
-            <div class="about-grid">
-                <div class="about-image float-left">
+            <div class="about-bento">
+                <div class="bento-card bento-avatar float-up">
                     <div class="image-wrapper">
                         <div class="orbit-ring"></div>
                         <div class="orbit-ring ring-2"></div>
                         <img src="https://github.com/baghelyogesh55.png" alt="Yogesh Baghel" loading="lazy" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Yogesh+Baghel&size=300&background=0ea5e9&color=fff&bold=true'">
                     </div>
+                    <h3 class="bento-name">Yogesh Baghel</h3>
+                    <span class="bento-role">Salesforce Developer &amp; Admin</span>
                 </div>
-                <div class="about-content float-right">
+
+                <div class="bento-card bento-bio float-up" data-delay="100">
+                    <span class="bento-label">Who I Am</span>
                     <p class="about-text">Salesforce Developer &amp; Administrator with <strong>4+ years of experience</strong> building scalable solutions across <strong>Sales Cloud</strong> and <strong>Service Cloud</strong>.</p>
-                    <p class="about-text">Previously at <strong>Salesforce itself</strong> — bringing platform-depth that most developers simply don't have. Currently building Lightning Web Components, Apex, and integrations at <strong>Komodo Health</strong>.</p>
-                    <p class="about-text">Passionate about solving real business challenges with clean, maintainable code — combining strong <strong>administration</strong> fundamentals with custom <strong>LWC &amp; Apex</strong> development and reliable integrations.</p>
+                    <p class="about-text">Previously at <strong>Salesforce itself</strong> — bringing platform-depth most developers don't have. Now building Lightning Web Components, Apex, and integrations at <strong>Komodo Health</strong>, combining strong <strong>admin</strong> fundamentals with clean custom code.</p>
+                </div>
+
+                <div class="bento-card bento-facts float-up" data-delay="200">
+                    <span class="bento-label">Quick Facts</span>
+                    <ul class="fact-list">
+                        <li><i class="fas fa-briefcase"></i> 4+ yrs experience</li>
+                        <li><i class="fas fa-award"></i> 10x Salesforce Certified</li>
+                        <li><i class="fas fa-building"></i> Komodo Health</li>
+                        <li><i class="fas fa-location-dot"></i> Bengaluru, India</li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-connect float-up" data-delay="300">
+                    <span class="bento-label">Connect</span>
+                    <div class="about-links">
+                        <a href="https://www.linkedin.com/in/yogesh-kumar-baghel" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/baghelyogesh55" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="mailto:baghelyogesh55@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-stack float-up" data-delay="400">
+                    <span class="bento-label">Tech Stack</span>
                     <div class="about-tags">
                         <span class="tag">LWC Development</span>
                         <span class="tag">Apex</span>
                         <span class="tag">Sales Cloud</span>
                         <span class="tag">Service Cloud</span>
                         <span class="tag">Administration</span>
+                        <span class="tag">Flows &amp; Automation</span>
                         <span class="tag">REST/SOAP APIs</span>
-                    </div>
-                    <div class="about-links">
-                        <a href="https://www.linkedin.com/in/yogesh-kumar-baghel" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/baghelyogesh55" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="mailto:baghelyogesh55@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>

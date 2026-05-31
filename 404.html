@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Lost in Space | Yogesh Baghel</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230ea5e9'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='26' font-weight='800' fill='url(%23g)'%3EYB%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { cursor: auto; }
+        .nf {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            gap: 1.2rem;
+        }
+        .nf-ship { animation: nfFloat 4s ease-in-out infinite; filter: drop-shadow(0 0 18px rgba(14,165,233,0.6)); }
+        @keyframes nfFloat { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-18px) rotate(6deg); } }
+        .nf-code {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(4rem, 16vw, 9rem);
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, #f1f5f9, var(--accent) 55%, var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nf h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.3rem, 4vw, 2rem); }
+        .nf p { color: var(--text-secondary); max-width: 460px; line-height: 1.7; }
+        .nf .btn { margin-top: 0.6rem; }
+    </style>
+</head>
+<body>
+    <!-- Animated aurora background -->
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob a1"></span>
+        <span class="aurora-blob a2"></span>
+        <span class="aurora-blob a3"></span>
+    </div>
+
+    <main class="nf">
+        <svg class="nf-ship" viewBox="0 0 32 44" width="90" height="120">
+            <defs>
+                <linearGradient id="b" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#e2f3ff"/><stop offset="0.5" stop-color="#0ea5e9"/><stop offset="1" stop-color="#8b5cf6"/>
+                </linearGradient>
+                <linearGradient id="f" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#06b6d4"/><stop offset="0.6" stop-color="#0ea5e9"/><stop offset="1" stop-color="rgba(139,92,246,0)"/>
+                </linearGradient>
+            </defs>
+            <polygon points="12,26 20,26 16,42" fill="url(#f)"/>
+            <polygon points="16,16 4,32 14,28" fill="#6d28d9"/>
+            <polygon points="16,16 28,32 18,28" fill="#6d28d9"/>
+            <polygon points="16,1 25,28 16,23 7,28" fill="url(#b)" stroke="#bae6fd" stroke-width="0.5"/>
+            <circle cx="16" cy="13" r="3" fill="#0a0a0f" stroke="#7dd3fc" stroke-width="0.8"/>
+        </svg>
+        <div class="nf-code">404</div>
+        <h1>Lost in <span class="gradient-text">Space</span></h1>
+        <p>This page drifted off into the void. Let's navigate your ship back to familiar orbit.</p>
+        <a href="/" class="btn btn-primary"><i class="fas fa-rocket"></i> Back to Home</a>
+    </main>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</body>
+</html>

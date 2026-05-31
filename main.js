@@ -332,6 +332,129 @@
         });
     }
 
+    // ---------- 3D tilt + glare on cards ----------
+    function initTilt() {
+        if (reducedMotion || isTouch) return;
+        const cards = $$('.skill-card, .cert-card, .timeline-card');
+        const MAX = 9; // max tilt in degrees
+        cards.forEach((card) => {
+            card.classList.add('tilt-card');
+            const glare = document.createElement('span');
+            glare.className = 'card-glare';
+            card.appendChild(glare);
+
+            card.addEventListener('pointermove', (e) => {
+                const r = card.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width;
+                const py = (e.clientY - r.top) / r.height;
+                const rx = (0.5 - py) * MAX * 2;
+                const ry = (px - 0.5) * MAX * 2;
+                card.style.transform =
+                    `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px) scale(1.02)`;
+                glare.style.setProperty('--gx', (px * 100) + '%');
+                glare.style.setProperty('--gy', (py * 100) + '%');
+                card.classList.add('tilting');
+            });
+            card.addEventListener('pointerleave', () => {
+                card.style.transform = '';
+                card.classList.remove('tilting');
+            });
+        });
+    }
+
+    // ---------- Command palette (⌘K) ----------
+    function initCommandPalette() {
+        const modal = $('#cmdk');
+        const input = $('#cmdkInput');
+        const list = $('#cmdkList');
+        const trigger = $('#cmdkTrigger');
+        if (!modal || !input || !list) return;
+
+        const go = (id) => () => {
+            const t = document.querySelector(id);
+            if (t) t.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+        };
+        const open = (url) => () => window.open(url, '_blank', 'noopener');
+
+        const items = [
+            { icon: 'fa-house',          label: 'Home',           sub: 'Section', run: go('#hero') },
+            { icon: 'fa-user',           label: 'About',          sub: 'Section', run: go('#about') },
+            { icon: 'fa-layer-group',    label: 'Skills',         sub: 'Section', run: go('#skills') },
+            { icon: 'fa-briefcase',      label: 'Experience',     sub: 'Section', run: go('#experience') },
+            { icon: 'fa-award',          label: 'Certifications', sub: 'Section', run: go('#certifications') },
+            { icon: 'fa-rocket',         label: 'Projects',       sub: 'Section', run: go('#projects') },
+            { icon: 'fa-envelope',       label: 'Contact',        sub: 'Section', run: go('#contact') },
+            { icon: 'fa-circle-half-stroke', label: 'Toggle theme', sub: 'Action', run: () => { const t = $('#themeToggle'); if (t) t.click(); } },
+            { icon: 'fa-linkedin',       label: 'LinkedIn',       sub: 'Link', brand: true, run: open('https://linkedin.com/in/yogesh-kumar-baghel') },
+            { icon: 'fa-github',         label: 'GitHub',         sub: 'Link', brand: true, run: open('https://github.com/baghelyogesh55') },
+            { icon: 'fa-envelope',       label: 'Email me',       sub: 'Link', run: open('mailto:baghelyogesh55@gmail.com') },
+        ];
+
+        let filtered = items.slice();
+        let selected = 0;
+
+        const renderList = () => {
+            if (!filtered.length) {
+                list.innerHTML = '<li class="cmdk-empty">No results</li>';
+                return;
+            }
+            list.innerHTML = filtered.map((it, i) => `
+                <li class="cmdk-item ${i === selected ? 'selected' : ''}" data-index="${i}">
+                    <span class="ci-icon"><i class="fa${it.brand ? 'b' : 's'} ${it.icon}"></i></span>
+                    <span>${it.label}</span>
+                    <span class="ci-sub">${it.sub}</span>
+                </li>`).join('');
+        };
+
+        const filter = () => {
+            const q = input.value.trim().toLowerCase();
+            filtered = q ? items.filter((it) => it.label.toLowerCase().includes(q) || it.sub.toLowerCase().includes(q)) : items.slice();
+            selected = 0;
+            renderList();
+        };
+
+        const openModal = () => {
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+            input.value = '';
+            filter();
+            setTimeout(() => input.focus(), 30);
+        };
+        const closeModal = () => {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+        };
+        const runSelected = () => {
+            const it = filtered[selected];
+            if (it) { closeModal(); it.run(); }
+        };
+
+        // Global shortcuts.
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                modal.classList.contains('open') ? closeModal() : openModal();
+            } else if (e.key === 'Escape' && modal.classList.contains('open')) {
+                closeModal();
+            }
+        });
+        if (trigger) trigger.addEventListener('click', openModal);
+        modal.querySelector('[data-cmdk-close]').addEventListener('click', closeModal);
+
+        input.addEventListener('input', filter);
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') { e.preventDefault(); selected = Math.min(selected + 1, filtered.length - 1); renderList(); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); selected = Math.max(selected - 1, 0); renderList(); }
+            else if (e.key === 'Enter') { e.preventDefault(); runSelected(); }
+        });
+        list.addEventListener('click', (e) => {
+            const li = e.target.closest('.cmdk-item');
+            if (!li) return;
+            selected = parseInt(li.dataset.index, 10);
+            runSelected();
+        });
+    }
+
     // ---------- Preloader ----------
     function initPreloader() {
         const pre = $('#preloader');
@@ -393,6 +516,8 @@
         initActiveNav();
         initContactForm();
         initSmoothAnchors();
+        initTilt();
+        initCommandPalette();
         document.body.classList.add('loaded');
     }
 

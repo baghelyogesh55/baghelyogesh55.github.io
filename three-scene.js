@@ -138,12 +138,29 @@ function initHeroScene() {
     }));
     group.add(lines);
 
-    // --- Faint rotating wireframe core behind the headline ---
-    const core = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(5.5, 1),
-        new THREE.MeshBasicMaterial({ color: ACCENT_2, wireframe: true, transparent: true, opacity: 0.08 }),
+    // --- Planet centerpiece behind the headline ---
+    const planet = new THREE.Group();
+    const planetGlow = new THREE.Mesh(
+        new THREE.SphereGeometry(4.0, 32, 32),
+        new THREE.MeshBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.05 }),
     );
-    group.add(core);
+    const planetShell = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(4.2, 2),
+        new THREE.MeshBasicMaterial({ color: ACCENT_2, wireframe: true, transparent: true, opacity: 0.16 }),
+    );
+    const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(6.2, 0.05, 16, 140),
+        new THREE.MeshBasicMaterial({ color: ACCENT_3, transparent: true, opacity: 0.35 }),
+    );
+    ring.rotation.x = Math.PI / 2.3;
+    const ring2 = new THREE.Mesh(
+        new THREE.TorusGeometry(7.4, 0.03, 16, 140),
+        new THREE.MeshBasicMaterial({ color: ACCENT_2, transparent: true, opacity: 0.22 }),
+    );
+    ring2.rotation.x = Math.PI / 2.3;
+    ring2.rotation.y = 0.4;
+    planet.add(planetGlow, planetShell, ring, ring2);
+    group.add(planet);
 
     const render = () => {
         pointer.x += (pointer.tx - pointer.x) * 0.05;
@@ -180,8 +197,10 @@ function initHeroScene() {
         lineGeo.setDrawRange(0, n / 3);
         lineGeo.attributes.position.needsUpdate = true;
 
-        core.rotation.x += 0.0014;
-        core.rotation.y += 0.0019;
+        planet.rotation.y += 0.0016;
+        planetShell.rotation.y += 0.001;
+        ring.rotation.z += 0.0015;
+        ring2.rotation.z -= 0.0011;
         stars.rotation.y += 0.0003;
 
         // Mouse parallax.
@@ -217,36 +236,73 @@ function initSkillsScene() {
     size();
     window.addEventListener('resize', size);
 
-    const geoms = [
-        new THREE.IcosahedronGeometry(2.2, 0),
-        new THREE.OctahedronGeometry(2.4, 0),
-        new THREE.TorusGeometry(1.8, 0.5, 8, 20),
-        new THREE.DodecahedronGeometry(2.1, 0),
-    ];
-    const colors = [ACCENT, ACCENT_2, ACCENT_3, ACCENT];
-    const shapes = [];
-    for (let i = 0; i < 9; i++) {
-        const mesh = new THREE.Mesh(
-            geoms[i % geoms.length],
-            new THREE.MeshBasicMaterial({ color: colors[i % colors.length], wireframe: true, transparent: true, opacity: 0.6 }),
-        );
-        mesh.position.set((Math.random() - 0.5) * 28, (Math.random() - 0.5) * 16, (Math.random() - 0.5) * 8);
-        const s = 0.5 + Math.random() * 0.8;
-        mesh.scale.setScalar(s);
-        mesh.userData.spin = { x: (Math.random() - 0.5) * 0.01, y: (Math.random() - 0.5) * 0.01 };
-        mesh.userData.drift = (Math.random() - 0.5) * 0.01;
-        scene.add(mesh);
-        shapes.push(mesh);
+    const group = new THREE.Group();
+    scene.add(group);
+
+    // Drifting constellation nodes + dynamic connecting lines (a skill star-map).
+    const NODES = 58;
+    const BOX_X = 30, BOX_Y = 16, BOX_Z = 8;
+    const LINK = 6;
+    const pos = new Float32Array(NODES * 3);
+    const vel = [];
+    for (let i = 0; i < NODES; i++) {
+        pos[i * 3]     = (Math.random() - 0.5) * BOX_X;
+        pos[i * 3 + 1] = (Math.random() - 0.5) * BOX_Y;
+        pos[i * 3 + 2] = (Math.random() - 0.5) * BOX_Z;
+        vel.push({
+            x: (Math.random() - 0.5) * 0.02,
+            y: (Math.random() - 0.5) * 0.02,
+            z: (Math.random() - 0.5) * 0.01,
+        });
     }
+    const nodeGeo = new THREE.BufferGeometry();
+    nodeGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const nodes = new THREE.Points(nodeGeo, new THREE.PointsMaterial({
+        color: ACCENT, size: 0.22, transparent: true, opacity: 0.95, sizeAttenuation: true,
+    }));
+    group.add(nodes);
+
+    const maxSeg = (NODES * NODES) / 2;
+    const linePos = new Float32Array(maxSeg * 6);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos, 3));
+    const lines = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({
+        color: ACCENT_3, transparent: true, opacity: 0.25,
+    }));
+    group.add(lines);
 
     const render = () => {
-        shapes.forEach((m) => {
-            m.rotation.x += m.userData.spin.x;
-            m.rotation.y += m.userData.spin.y;
-            m.position.y += m.userData.drift;
-            if (m.position.y > 9) m.position.y = -9;
-            if (m.position.y < -9) m.position.y = 9;
-        });
+        pointer.x += (pointer.tx - pointer.x) * 0.04;
+        pointer.y += (pointer.ty - pointer.y) * 0.04;
+
+        const p = nodeGeo.attributes.position.array;
+        for (let i = 0; i < NODES; i++) {
+            p[i * 3]     += vel[i].x;
+            p[i * 3 + 1] += vel[i].y;
+            p[i * 3 + 2] += vel[i].z;
+            if (Math.abs(p[i * 3])     > BOX_X / 2) vel[i].x *= -1;
+            if (Math.abs(p[i * 3 + 1]) > BOX_Y / 2) vel[i].y *= -1;
+            if (Math.abs(p[i * 3 + 2]) > BOX_Z / 2) vel[i].z *= -1;
+        }
+        nodeGeo.attributes.position.needsUpdate = true;
+
+        let n = 0;
+        for (let i = 0; i < NODES; i++) {
+            for (let j = i + 1; j < NODES; j++) {
+                const dx = p[i * 3] - p[j * 3];
+                const dy = p[i * 3 + 1] - p[j * 3 + 1];
+                const dz = p[i * 3 + 2] - p[j * 3 + 2];
+                if (dx * dx + dy * dy + dz * dz < LINK * LINK) {
+                    linePos[n++] = p[i * 3];     linePos[n++] = p[i * 3 + 1]; linePos[n++] = p[i * 3 + 2];
+                    linePos[n++] = p[j * 3];     linePos[n++] = p[j * 3 + 1]; linePos[n++] = p[j * 3 + 2];
+                }
+            }
+        }
+        lineGeo.setDrawRange(0, n / 3);
+        lineGeo.attributes.position.needsUpdate = true;
+
+        group.rotation.y += (pointer.x * 0.4 - group.rotation.y) * 0.04;
+        group.rotation.x += (pointer.y * 0.25 - group.rotation.x) * 0.04;
         renderer.render(scene, camera);
     };
     register(canvas, render);
