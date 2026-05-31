@@ -131,8 +131,9 @@
         const NAME = 'Yogesh Baghel';
         const ROLES = [
             'Salesforce Developer',
-            'CPQ & Revenue Cloud Expert',
-            'Agentforce & AI Specialist',
+            'LWC & Apex Specialist',
+            'Sales & Service Cloud Expert',
+            'Salesforce Administrator',
             '10x Certified Trailblazer',
         ];
 
