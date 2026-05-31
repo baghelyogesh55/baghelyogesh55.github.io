@@ -332,6 +332,23 @@
         });
     }
 
+    // ---------- Magnetic buttons ----------
+    function initMagnetic() {
+        if (reducedMotion || isTouch) return;
+        const btns = $$('.btn-primary, .btn-secondary');
+        const STRENGTH = 0.35;
+        btns.forEach((btn) => {
+            btn.style.transition = 'transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s ease';
+            btn.addEventListener('pointermove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const mx = e.clientX - (r.left + r.width / 2);
+                const my = e.clientY - (r.top + r.height / 2);
+                btn.style.transform = `translate(${mx * STRENGTH}px, ${my * STRENGTH}px)`;
+            });
+            btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+        });
+    }
+
     // ---------- 3D tilt + glare on cards ----------
     function initTilt() {
         if (reducedMotion || isTouch) return;
@@ -517,6 +534,7 @@
         initContactForm();
         initSmoothAnchors();
         initTilt();
+        initMagnetic();
         initCommandPalette();
         document.body.classList.add('loaded');
     }

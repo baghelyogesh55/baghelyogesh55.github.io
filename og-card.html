@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(1200px 600px at 78% 28%, rgba(139,92,246,0.35), transparent 60%),
+                    radial-gradient(900px 500px at 12% 80%, rgba(14,165,233,0.35), transparent 60%),
+                    #0a0a0f;
+        color: #f1f5f9;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 80px;
+    }
+    .grid-overlay {
+        position: absolute; inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 80%);
+    }
+    .content { position: relative; z-index: 2; max-width: 760px; }
+    .badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border: 1px solid rgba(14,165,233,0.4);
+        background: rgba(14,165,233,0.12);
+        color: #38bdf8;
+        border-radius: 50px;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 28px;
+    }
+    h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 96px;
+        line-height: 1.02;
+        font-weight: 700;
+        background: linear-gradient(120deg, #f1f5f9 10%, #0ea5e9 55%, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 18px;
+    }
+    .role { font-size: 34px; color: #94a3b8; font-weight: 500; margin-bottom: 36px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chip {
+        padding: 10px 22px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+        border-radius: 50px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #e2e8f0;
+    }
+    .handle {
+        position: absolute;
+        bottom: 70px; left: 80px;
+        z-index: 2;
+        font-size: 22px;
+        color: #64748b;
+        font-weight: 500;
+    }
+    .planet {
+        position: absolute;
+        right: -60px; top: 50%;
+        transform: translateY(-50%);
+        width: 520px; height: 520px;
+        z-index: 1;
+    }
+    .planet .core {
+        position: absolute; top: 50%; left: 50%;
+        width: 240px; height: 240px;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #38bdf8, #0ea5e9 45%, #6d28d9 90%);
+        box-shadow: 0 0 90px rgba(14,165,233,0.6), inset -30px -20px 60px rgba(0,0,0,0.5);
+    }
+    .planet .ring {
+        position: absolute; top: 50%; left: 50%;
+        border: 3px solid rgba(6,182,212,0.55);
+        border-radius: 50%;
+        transform: translate(-50%,-50%) rotateX(74deg);
+    }
+    .planet .ring.r1 { width: 400px; height: 400px; }
+    .planet .ring.r2 { width: 480px; height: 480px; border-color: rgba(139,92,246,0.4); }
+</style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="planet">
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+        <div class="core"></div>
+    </div>
+    <div class="content">
+        <span class="badge">⚡ 10x Salesforce Certified</span>
+        <h1>Yogesh<br>Baghel</h1>
+        <div class="role">Salesforce Developer &amp; Administrator</div>
+        <div class="chips">
+            <span class="chip">LWC</span>
+            <span class="chip">Apex</span>
+            <span class="chip">Sales Cloud</span>
+            <span class="chip">Service Cloud</span>
+            <span class="chip">Integrations</span>
+        </div>
+    </div>
+    <div class="handle">baghelyogesh55.github.io</div>
+</body>
+</html>

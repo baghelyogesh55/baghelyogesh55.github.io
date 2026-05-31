@@ -34,6 +34,21 @@ body {
     cursor: none;
 }
 
+/* ===== SKIP TO CONTENT (a11y) ===== */
+.skip-link {
+    position: fixed;
+    top: -120px; left: 1rem;
+    z-index: 10010;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0 0 10px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: top 0.2s ease;
+}
+.skip-link:focus { top: 0; outline: 2px solid #fff; }
+
 /* ===== AURORA BACKGROUND ===== */
 .aurora {
     position: fixed;
