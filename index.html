@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogesh Baghel | Salesforce Developer · CPQ &amp; AI Specialist</title>
+    <meta name="description" content="Senior Salesforce Developer with 4+ years building enterprise CPQ, Revenue Cloud, LWC and Agentforce AI solutions. 10x Salesforce Certified.">
+    <meta name="author" content="Yogesh Baghel">
+    <meta name="theme-color" content="#0a0a0f">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Yogesh Baghel | Salesforce Developer">
+    <meta property="og:description" content="Enterprise Salesforce solutions — CPQ, Revenue Cloud, LWC, Apex & Agentforce AI. 10x Certified.">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Inline SVG favicon (YB monogram) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230ea5e9'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,Helvetica,sans-serif' font-size='26' font-weight='800' fill='url(%23g)'%3EYB%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">YB</div>
+        <div class="preloader-bar"><span></span></div>
+        <div class="preloader-text">Initializing systems…</div>
+    </div>
+
+    <!-- Spaceship Cursor -->
+    <div class="cursor-ship" id="cursorShip" aria-hidden="true">
+        <svg viewBox="0 0 32 44" width="30" height="40">
+            <defs>
+                <linearGradient id="shipBody" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#e2f3ff"/>
+                    <stop offset="0.5" stop-color="#0ea5e9"/>
+                    <stop offset="1" stop-color="#8b5cf6"/>
+                </linearGradient>
+                <linearGradient id="shipFlame" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#06b6d4"/>
+                    <stop offset="0.6" stop-color="#0ea5e9"/>
+                    <stop offset="1" stop-color="rgba(139,92,246,0)"/>
+                </linearGradient>
+            </defs>
+            <!-- thruster flame -->
+            <polygon class="ship-flame" points="12,26 20,26 16,42" fill="url(#shipFlame)"/>
+            <!-- wings -->
+            <polygon points="16,16 4,32 14,28" fill="#6d28d9"/>
+            <polygon points="16,16 28,32 18,28" fill="#6d28d9"/>
+            <!-- hull -->
+            <polygon points="16,1 25,28 16,23 7,28" fill="url(#shipBody)" stroke="#bae6fd" stroke-width="0.5"/>
+            <!-- cockpit -->
+            <circle cx="16" cy="13" r="3" fill="#0a0a0f" stroke="#7dd3fc" stroke-width="0.8"/>
+        </svg>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">YB</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">👋 Welcome to my portfolio</div>
+            <h1 class="hero-title">
+                <span class="hero-name" id="heroName"></span>
+            </h1>
+            <div class="hero-roles">
+                <span class="role-prefix">I'm a </span>
+                <span class="role-text" id="roleText"></span>
+                <span class="role-cursor">|</span>
+            </div>
+            <p class="hero-desc">Building enterprise-grade Salesforce solutions that drive revenue, automate operations, and deliver measurable business impact.</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-plus">+</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10">0</span>
+                    <span class="stat-plus">x</span>
+                    <span class="stat-label">Certified</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-plus">+</span>
+                    <span class="stat-label">Connections</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">Who I Am</span>
+                <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-image float-left">
+                    <div class="image-wrapper">
+                        <div class="orbit-ring"></div>
+                        <div class="orbit-ring ring-2"></div>
+                        <img src="https://github.com/baghelyogesh55.png" alt="Yogesh Baghel" loading="lazy" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Yogesh+Baghel&size=300&background=0ea5e9&color=fff&bold=true'">
+                    </div>
+                </div>
+                <div class="about-content float-right">
+                    <p class="about-text">Senior Salesforce Developer with <strong>4+ years of experience</strong> delivering enterprise-grade solutions across Sales Cloud, Service Cloud, CPQ, and Revenue Cloud.</p>
+                    <p class="about-text">Previously at <strong>Salesforce itself</strong> — bringing platform-depth that most developers simply don't have. Currently specializing in CPQ and Revenue Cloud implementations at <strong>Komodo Health</strong>.</p>
+                    <p class="about-text">Passionate about solving complex business challenges through scalable Salesforce architecture, clean integrations, and cutting-edge AI with <strong>Agentforce</strong>.</p>
+                    <div class="about-tags">
+                        <span class="tag">LWC Development</span>
+                        <span class="tag">Apex</span>
+                        <span class="tag">CPQ</span>
+                        <span class="tag">Revenue Cloud</span>
+                        <span class="tag">Agentforce</span>
+                        <span class="tag">REST/SOAP APIs</span>
+                    </div>
+                    <div class="about-links">
+                        <a href="https://www.linkedin.com/in/yogesh-kumar-baghel" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/baghelyogesh55" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="mailto:baghelyogesh55@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section section-dark">
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">What I Do</span>
+                <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+            </div>
+            <div class="skills-canvas-wrapper">
+                <canvas id="skillsCanvas"></canvas>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card float-up" data-delay="0">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>LWC & Apex</h3>
+                    <p>Lightning Web Components, Apex Classes, Triggers, Batch Jobs, Queueable</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-card float-up" data-delay="100">
+                    <div class="skill-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <h3>CPQ & Revenue Cloud</h3>
+                    <p>Quote-to-Cash, Product Rules, Pricing Rules, Revenue Schedules</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+                </div>
+                <div class="skill-card float-up" data-delay="200">
+                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI & Agentforce</h3>
+                    <p>Einstein AI, Agentforce Agents, Prompt Templates, Copilot Actions</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+                </div>
+                <div class="skill-card float-up" data-delay="300">
+                    <div class="skill-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Integrations</h3>
+                    <p>REST/SOAP APIs, Named Credentials, Platform Events, Change Data Capture</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+                </div>
+                <div class="skill-card float-up" data-delay="400">
+                    <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Sales & Service Cloud</h3>
+                    <p>Flows, Process Builder, Reports, Dashboards, Security Model</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+                </div>
+                <div class="skill-card float-up" data-delay="500">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <h3>Data Cloud</h3>
+                    <p>Data Streams, Identity Resolution, Calculated Insights, Segmentation</p>
+                    <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">My Journey</span>
+                <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item float-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="timeline-header">
+                            <div class="company-logo sf-logo">KH</div>
+                            <div>
+                                <h3>Salesforce Developer</h3>
+                                <span class="company-name">Komodo Health</span>
+                            </div>
+                            <span class="timeline-badge current">Current</span>
+                        </div>
+                        <span class="timeline-date"><i class="fas fa-calendar"></i> Mar 2026 – Present</span>
+                        <ul class="timeline-points">
+                            <li>Leading Salesforce CPQ implementation for enterprise healthcare clients</li>
+                            <li>Building custom LWC components for quote configuration workflows</li>
+                            <li>Integrating Salesforce with external healthcare data systems via REST APIs</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span>CPQ</span><span>LWC</span><span>Apex</span><span>REST API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item float-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="timeline-header">
+                            <div class="company-logo kh-logo">KH</div>
+                            <div>
+                                <h3>Consultant</h3>
+                                <span class="company-name">Komodo Health</span>
+                            </div>
+                        </div>
+                        <span class="timeline-date"><i class="fas fa-calendar"></i> Apr 2025 – Mar 2026 · 1 yr</span>
+                        <ul class="timeline-points">
+                            <li>Delivered end-to-end Salesforce Revenue Cloud implementations</li>
+                            <li>Designed scalable data models for complex healthcare business processes</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span>Revenue Cloud</span><span>Data Modeling</span><span>Flows</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item float-right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="timeline-header">
+                            <div class="company-logo salesforce-logo">SF</div>
+                            <div>
+                                <h3>Engineer</h3>
+                                <span class="company-name">Salesforce</span>
+                            </div>
+                            <span class="timeline-badge prestige">⭐ Prestige</span>
+                        </div>
+                        <span class="timeline-date"><i class="fas fa-calendar"></i> Nov 2023 – Apr 2025 · 1 yr 6 mos</span>
+                        <ul class="timeline-points">
+                            <li>Worked at Salesforce HQ — deep platform knowledge from the inside</li>
+                            <li>Built internal Salesforce tools using LWC and Apex at scale</li>
+                            <li>Contributed to Salesforce DX tooling and deployment pipelines</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span>LWC</span><span>Apex</span><span>Salesforce DX</span><span>Platform</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item float-left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="timeline-header">
+                            <div class="company-logo persistent-logo">PS</div>
+                            <div>
+                                <h3>Software Engineer</h3>
+                                <span class="company-name">Persistent Systems</span>
+                            </div>
+                        </div>
+                        <span class="timeline-date"><i class="fas fa-calendar"></i> Jun 2022 – Nov 2023 · 1 yr 6 mos</span>
+                        <ul class="timeline-points">
+                            <li>Developed Salesforce solutions for enterprise clients across industries</li>
+                            <li>Built Apex Data Loader integrations and automated data migration workflows</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span>Apex</span><span>Data Loader</span><span>Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications" class="section section-dark">
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">Credentials</span>
+                <h2 class="section-title">10x Salesforce <span class="gradient-text">Certified</span></h2>
+            </div>
+            <div class="cert-orbit-wrapper">
+                <canvas id="certCanvas"></canvas>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card float-up" data-delay="0">
+                    <div class="cert-icon">🏆</div>
+                    <h4>Platform Developer II</h4>
+                    <span>Feb 2025</span>
+                </div>
+                <div class="cert-card float-up" data-delay="100">
+                    <div class="cert-icon">🤖</div>
+                    <h4>AI Specialist</h4>
+                    <span>Dec 2024</span>
+                </div>
+                <div class="cert-card float-up" data-delay="200">
+                    <div class="cert-icon">☁️</div>
+                    <h4>Sales Cloud Consultant</h4>
+                    <span>2024</span>
+                </div>
+                <div class="cert-card float-up" data-delay="300">
+                    <div class="cert-icon">📊</div>
+                    <h4>Data Cloud Consultant</h4>
+                    <span>2024</span>
+                </div>
+                <div class="cert-card float-up" data-delay="400">
+                    <div class="cert-icon">⚡</div>
+                    <h4>Platform Developer I</h4>
+                    <span>2023</span>
+                </div>
+                <div class="cert-card float-up" data-delay="500">
+                    <div class="cert-icon">🛡️</div>
+                    <h4>Administrator</h4>
+                    <span>2023</span>
+                </div>
+                <div class="cert-card float-up" data-delay="600">
+                    <div class="cert-icon">🟨</div>
+                    <h4>JavaScript Developer I</h4>
+                    <span>2023</span>
+                </div>
+                <div class="cert-card float-up" data-delay="700">
+                    <div class="cert-icon">📱</div>
+                    <h4>App Builder</h4>
+                    <span>2022</span>
+                </div>
+                <div class="cert-card float-up" data-delay="800">
+                    <div class="cert-icon">🔧</div>
+                    <h4>Platform App Builder</h4>
+                    <span>2022</span>
+                </div>
+                <div class="cert-card float-up" data-delay="900">
+                    <div class="cert-icon">🌐</div>
+                    <h4>Associate</h4>
+                    <span>2022</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">What I'm Building</span>
+                <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card float-up" data-delay="0">
+                    <div class="project-front">
+                        <div class="project-badge coming-soon">🚧 Coming Soon</div>
+                        <div class="project-icon">📋</div>
+                        <h3>SmartBoard for Salesforce</h3>
+                        <p>Drag-and-drop Kanban board with AI deal scoring for Salesforce</p>
+                        <div class="project-tech">
+                            <span>LWC</span><span>Apex</span><span>AI Scoring</span><span>AppExchange</span>
+                        </div>
+                        <div class="project-hover-hint">Hover to see more →</div>
+                    </div>
+                    <div class="project-back">
+                        <h3>SmartBoard for Salesforce</h3>
+                        <ul>
+                            <li>🎯 Real-time drag & drop pipeline management</li>
+                            <li>🤖 AI-powered deal health scoring (1–10)</li>
+                            <li>⚡ Live updates via Platform Events</li>
+                            <li>📊 Column bottleneck detection</li>
+                            <li>💼 Quick action drawer (no page navigation)</li>
+                            <li>🏊 Swimlane view by Owner/Month</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/baghelyogesh55" target="_blank" class="btn btn-small"><i class="fab fa-github"></i> GitHub</a>
+                            <span class="btn btn-small disabled">🚧 In Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card float-up" data-delay="200">
+                    <div class="project-front">
+                        <div class="project-badge coming-soon">🚧 Coming Soon</div>
+                        <div class="project-icon">🤖</div>
+                        <h3>Agentforce CPQ Assistant</h3>
+                        <p>AI agent that configures quotes using natural language inside Salesforce CPQ</p>
+                        <div class="project-tech">
+                            <span>Agentforce</span><span>CPQ</span><span>LWC</span><span>Einstein AI</span>
+                        </div>
+                        <div class="project-hover-hint">Hover to see more →</div>
+                    </div>
+                    <div class="project-back">
+                        <h3>Agentforce CPQ Assistant</h3>
+                        <ul>
+                            <li>💬 Natural language quote configuration</li>
+                            <li>🔗 Deep CPQ integration with AI</li>
+                            <li>⚡ Instant product recommendations</li>
+                            <li>📈 Revenue impact predictions</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/baghelyogesh55" target="_blank" class="btn btn-small"><i class="fab fa-github"></i> GitHub</a>
+                            <span class="btn btn-small disabled">🚧 In Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card float-up" data-delay="400">
+                    <div class="project-front">
+                        <div class="project-badge portfolio">🌐 Live</div>
+                        <div class="project-icon">✨</div>
+                        <h3>3D Developer Portfolio</h3>
+                        <p>This portfolio! Modern 3D portfolio with Three.js, GSAP animations and glassmorphism</p>
+                        <div class="project-tech">
+                            <span>Three.js</span><span>GSAP</span><span>HTML/CSS/JS</span>
+                        </div>
+                        <div class="project-hover-hint">Hover to see more →</div>
+                    </div>
+                    <div class="project-back">
+                        <h3>3D Developer Portfolio</h3>
+                        <ul>
+                            <li>🌌 Three.js particle field background</li>
+                            <li>🎨 Glassmorphism UI design</li>
+                            <li>⚡ Scroll-triggered float animations</li>
+                            <li>🌙 Dark/Light mode toggle</li>
+                            <li>📱 Fully responsive</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/baghelyogesh55" target="_blank" class="btn btn-small"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-small"><i class="fas fa-external-link-alt"></i> Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section section-dark">
+        <canvas id="contactCanvas"></canvas>
+        <div class="container">
+            <div class="section-header float-up">
+                <span class="section-tag">Let's Talk</span>
+                <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info float-left">
+                    <h3>Let's build something amazing together</h3>
+                    <p>Whether you have a Salesforce project, want to collaborate on a product, or just want to connect — I'm always open to a conversation.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <span>Email</span>
+                                <a href="mailto:baghelyogesh55@gmail.com">baghelyogesh55@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <span>LinkedIn</span>
+                                <a href="https://linkedin.com/in/yogesh-kumar-baghel" target="_blank">yogesh-kumar-baghel</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-github"></i></div>
+                            <div>
+                                <span>GitHub</span>
+                                <a href="https://github.com/baghelyogesh55" target="_blank">baghelyogesh55</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <span>Location</span>
+                                <a>Bengaluru, Karnataka, India</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper float-right">
+                    <form class="contact-form glass-card" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email" required>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" placeholder="Subject" required>
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-rocket"></i>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">YB</div>
+                <p>Built with ❤️ by Yogesh Baghel</p>
+                <p class="footer-sub">Salesforce Developer · CPQ Expert · AI Specialist</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/yogesh-kumar-baghel" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/baghelyogesh55" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:baghelyogesh55@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="footer-copy">© 2026 Yogesh Baghel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modern Three.js (r160) via ES module import-map — no build step -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script type="module" src="three-scene.js"></script>
+    <script src="main.js" defer></script>
+</body>
+</html>
